@@ -1,111 +1,187 @@
-/* color palette from <https://github.com/vuejs/theme> */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import './tailwind.css';
 
-/* Primary and Surface Palettes */
-:root {
-    --p-primary-50: #ecfdf5;
-    --p-primary-100: #d1fae5;
-    --p-primary-200: #a7f3d0;
-    --p-primary-300: #6ee7b7;
-    --p-primary-400: #34d399;
-    --p-primary-500: #10b981;
-    --p-primary-600: #059669;
-    --p-primary-700: #047857;
-    --p-primary-800: #065f46;
-    --p-primary-900: #064e3b;
-    --p-primary-950: #022c22;
-    --p-surface-0: #ffffff;
-    --p-surface-50: #fafafa;
-    --p-surface-100: #f4f4f5;
-    --p-surface-200: #e4e4e7;
-    --p-surface-300: #d4d4d8;
-    --p-surface-400: #a1a1aa;
-    --p-surface-500: #71717a;
-    --p-surface-600: #52525b;
-    --p-surface-700: #3f3f46;
-    --p-surface-800: #27272a;
-    --p-surface-900: #18181b;
-    --p-surface-950: #09090b;
-    --p-content-border-radius: 6px;
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+  body {
+    @apply relative font-normal font-outfit z-10 bg-gray-50;
+  }
 }
 
-/* Light */
-:root {
-    --p-primary-color: var(--p-primary-500);
-    --p-primary-contrast-color: var(--p-surface-0);
-    --p-primary-hover-color: var(--p-primary-600);
-    --p-primary-active-color: var(--p-primary-700);
-    --p-content-border-color: var(--p-surface-200);
-    --p-content-hover-background: var(--p-surface-100);
-    --p-content-hover-color: var(--p-surface-800);
-    --p-highlight-background: var(--p-primary-50);
-    --p-highlight-color: var(--p-primary-700);
-    --p-highlight-focus-background: var(--p-primary-100);
-    --p-highlight-focus-color: var(--p-primary-800);
-    --p-text-color: var(--p-surface-700);
-    --p-text-hover-color: var(--p-surface-800);
-    --p-text-muted-color: var(--p-surface-500);
-    --p-text-hover-muted-color: var(--p-surface-600);
-}
+@layer utilities {
+  .menu-item {
+    @apply relative flex items-center w-full gap-3 px-3 py-2 font-medium rounded-lg text-theme-sm;
+  }
 
-/* 
- * Dark Mode
- * Defaults to system, change the selector to match the darkMode in tailwind.config.
- * For example; 
- * darkMode: ['selector', '[class*="app-dark"]'] 
- * should be;
- * :root[class="app-dark"] {
-*/
-@media (prefers-color-scheme: dark) {
-    :root {
-        --p-primary-color: var(--p-primary-400);
-        --p-primary-contrast-color: var(--p-surface-900);
-        --p-primary-hover-color: var(--p-primary-300);
-        --p-primary-active-color: var(--p-primary-200);
-        --p-content-border-color: var(--p-surface-700);
-        --p-content-hover-background: var(--p-surface-800);
-        --p-content-hover-color: var(--p-surface-0);
-        --p-highlight-background: color-mix(in srgb, var(--p-primary-400), transparent 84%);
-        --p-highlight-color: rgba(255, 255, 255, 0.87);
-        --p-highlight-focus-background: color-mix(in srgb, var(--p-primary-400), transparent 76%);
-        --p-highlight-focus-color: rgba(255, 255, 255, 0.87);
-        --p-text-color: var(--p-surface-0);
-        --p-text-hover-color: var(--p-surface-0);
-        --p-text-muted-color: var(--p-surface-400);
-        --p-text-hover-muted-color: var(--p-surface-300);
-    }
-}
+  .menu-item-active {
+    @apply bg-brand-100 text-brand-500 py-2;
+  }
 
+  .menu-item-inactive {
+    @apply text-gray-700 hover:bg-gray-100 group-hover:text-gray-700;
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
-}
+  .menu-item-icon {
+    @apply text-gray-500 group-hover:text-gray-700;
+  }
 
-body {
-  min-height: 100vh;
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  .menu-item-icon-active {
+    @apply text-brand-500;
+  }
+
+  .menu-item-icon-inactive {
+    @apply text-gray-500 group-hover:text-gray-700;
+  }
+
+  .menu-item-arrow {
+    @apply relative;
+  }
+
+  .menu-item-arrow-active {
+    @apply rotate-180 text-brand-500;
+  }
+
+  .menu-item-arrow-inactive {
+    @apply text-gray-500 group-hover:text-gray-700;
+  }
+
+  .menu-dropdown-item {
+    @apply relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-theme-sm font-medium;
+  }
+
+  .menu-dropdown-item-active {
+    @apply bg-brand-50 text-brand-500;
+  }
+
+  .menu-dropdown-item-inactive {
+    @apply text-gray-700 hover:bg-gray-100;
+  }
+
+  .menu-dropdown-badge {
+    @apply block rounded-full px-2.5 py-0.5 text-xs font-medium uppercase text-brand-500;
+  }
+
+  .menu-dropdown-badge-active {
+    @apply bg-brand-100;
+  }
+
+  .menu-dropdown-badge-inactive {
+    @apply bg-brand-50 group-hover:bg-brand-100;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply size-1.5;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-full;
+  }
+
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #344054;
+  }
+
+  input[type='date']::-webkit-inner-spin-button,
+  input[type='time']::-webkit-inner-spin-button,
+  input[type='date']::-webkit-calendar-picker-indicator,
+  input[type='time']::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+
+  .sidebar:hover {
+    width: 290px;
+  }
+  .sidebar:hover .logo {
+    display: block;
+  }
+  .sidebar:hover .logo-icon {
+    display: none;
+  }
+  .sidebar:hover .sidebar-header {
+    justify-content: space-between;
+  }
+  .sidebar:hover .menu-group-title {
+    display: block;
+  }
+  .sidebar:hover .menu-group-icon {
+    display: none;
+  }
+
+  .sidebar:hover .menu-item-text {
+    display: inline;
+  }
+  .sidebar:hover .menu-item-arrow {
+    display: block;
+  }
+  .sidebar:hover .menu-dropdown {
+    display: flex;
+  }
+
+  .tableCheckbox:checked ~ span span {
+    @apply opacity-100;
+  }
+  .tableCheckbox:checked ~ span {
+    @apply border-brand-500 bg-brand-500;
+  }
+
+  .taskCheckbox:checked ~ .box span {
+    @apply opacity-100;
+  }
+  .taskCheckbox:checked ~ p {
+    @apply text-gray-400 line-through;
+  }
+  .taskCheckbox:checked ~ .box {
+    @apply border-brand-500 bg-brand-500;
+  }
+
+  .task {
+    transition: all 0.2s ease;
+  }
+  .task.is-dragging {
+    border-radius: 0.75rem;
+    box-shadow:
+      0px 1px 3px rgba(16, 24, 40, 0.1),
+      0px 1px 2px rgba(16, 24, 40, 0.06);
+    opacity: 0.8;
+    cursor: grabbing;
+  }
+
+  .social-button {
+    @apply flex h-11 w-11 items-center justify-center gap-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800;
+  }
+
+  .edit-button {
+    @apply flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 lg:inline-flex lg:w-auto;
+  }
+  .text-theme-sm {
+    font-size: var(--text-theme-sm);
+    line-height: var(--text-theme-sm--line-height);
+  }
+  .custom-datepicker-popover {
+    min-width: 1000px !important;
+    max-width: 1000px !important;
+  }
 }
