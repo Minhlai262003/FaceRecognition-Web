@@ -7,7 +7,7 @@ const { isExpanded, isHovered } = useSidebar()
 </script>
 
 <template>
-  <div class="min-h-screen xl:flex">
+  <div class="min-h-screen flex">
     <app-sidebar />
     <Backdrop />
     <div class="flex-1 transition-all duration-300 ease-in-out">

@@ -1,9 +1,18 @@
+<script setup lang="ts">
+import { defineProps } from 'vue'
+
+interface BreadcrumbProps {
+  pageTitle: string
+}
+
+defineProps<BreadcrumbProps>()
+</script>
 <template>
   <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-    <h2 class="text-4xl font-semibold text-gray-800" x-text="pageTitle">
+    <h2 class="text-xl font-semibold text-gray-800" x-text="pageTitle">
       {{ pageTitle }}
     </h2>
-    <nav>
+    <!-- <nav>
       <ol class="flex items-center gap-1.5">
         <li>
           <router-link
@@ -33,16 +42,6 @@
           {{ pageTitle }}
         </li>
       </ol>
-    </nav>
+    </nav> -->
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineProps } from 'vue'
-
-interface BreadcrumbProps {
-  pageTitle: string
-}
-
-defineProps<BreadcrumbProps>()
-</script>

@@ -3,10 +3,9 @@ import { ref } from 'vue'
 import WaveTop from '../components/shared/WaveTop.vue'
 import { useAuth } from '../composables/auth/useAuth'
 import { COLORS } from '../constants/colors.ts'
-
-const { userName, fetchUser } = useAuth()
-fetchUser()
-
+import CameraDetection from '@/components/home/CameraDetection.vue'
+import { useRecognizeUser } from '@/composables/user/useRecognizeUser.ts'
+const { nameUser, handleRecognizeUser } = useRecognizeUser()
 const showDropdown = ref(false)
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
@@ -17,21 +16,21 @@ const toggleDropdown = () => {
   <div class="relative w-auto h-auto">
     <WaveTop />
     <div class="absolute inset-0 flex items-center justify-center h-screen w-full">
-      <div v-if="userName" class="flex-col items-center justify-center text-center">
-        <h1 class="text-8xl mb-[100px]">Hello {{ userName.name }}</h1>
-        <h2 class="text-6xl text-gray-800">Have a nice day!</h2>
+      <div v-if="nameUser" class="flex-col items-center justify-center text-center">
+        <h1 class="text-6xl mb-[2rem]">Hello {{ nameUser }}</h1>
+        <h2 class="text-4xl text-gray-800">Have a nice day!</h2>
       </div>
       <div v-else>
         <img
           src="@/assets/images/logo_enclave.png"
-          class="animate-flip-x h-[260px] w-auto"
+          class="animate-flip-x h-auto w-auto"
           alt="Logo Enclave"
         />
       </div>
     </div>
 
     <!-- Dropdown -->
-    <div v-if="userName" class="fixed bottom-[20px] right-[20px] z-[50px]">
+    <!-- <div v-if="userName" class="fixed bottom-[20px] right-[20px] z-[50px]">
       <div class="relative">
         <button
           @click="toggleDropdown"
@@ -57,12 +56,13 @@ const toggleDropdown = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
+  <CameraDetection @update:file="handleRecognizeUser($event)" />
 </template>
 
 <style>
-@keyframes flipX {
+/* @keyframes flipX {
   0% {
     transform: scaleX(1);
   }
@@ -76,5 +76,5 @@ const toggleDropdown = () => {
 
 .animate-flip-x {
   animation: flipX 4s infinite;
-}
+} */
 </style>

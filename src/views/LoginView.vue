@@ -5,15 +5,13 @@ import LoginForm from '@/components/auth/LoginForm.vue'
 
 <template>
   <div class="relative w-full min-h-screen flex flex-col justify-end">
-    <div class="absolute inset-0 flex flex-col md:flex-row items-center justify-center md:justify-around gap-6 md:gap-0 p-4">
+    <div
+      class="absolute inset-0 flex flex-col md:flex-row items-center justify-center md:justify-around gap-6 md:gap-0 p-4"
+    >
       <div class="w-full md:w-1/2 flex items-center justify-center mt-6 md:mt-0">
-        <img
-          src="@/assets/images/logo_enclave.png"
-          class="h-[10rem] md:h-[16rem] w-auto"
-          alt="Logo Enclave"
-        />
+        <img src="@/assets/images/logo_enclave.png" class="h-auto w-auto" alt="Logo Enclave" />
       </div>
-      <div class="w-full md:w-1/2 md:pr-[21rem] md:pl-[15rem] flex items-center justify-center">
+      <div class="w-full md:w-1/2 flex items-center justify-center px-10">
         <LoginForm />
       </div>
     </div>

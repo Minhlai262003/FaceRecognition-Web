@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { createUser } from '@/api/userService'
+import { createUser } from '@/api/user/userService'
 
 export function useCreateUser() {
   const loading = ref(false)
