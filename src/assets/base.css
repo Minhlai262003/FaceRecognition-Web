@@ -174,7 +174,7 @@
   }
 
   .edit-button {
-    @apply flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 lg:inline-flex lg:w-auto;
+    @apply flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-base font-medium text-gray-700  hover:bg-gray-50 hover:text-gray-800 lg:inline-flex lg:w-auto;
   }
   .text-theme-sm {
     font-size: var(--text-theme-sm);
@@ -183,5 +183,53 @@
   .custom-datepicker-popover {
     min-width: 1000px !important;
     max-width: 1000px !important;
+  }
+
+  .dp__main .dp__theme_light {
+    --dp-highlight-color: rgba(34, 233, 8, 0.993);
+    --dp-primary-color: #20a84a;
+    --dp-primary-text-color: #000000;
+  }
+
+  .dp__menu {
+    min-width: 350px;
+    font-size: 0.875rem;
+  }
+
+  .dp__action_button {
+    font-size: 0.875rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    color: #1f2937;
+    transition: background-color 0.2s ease;
+  }
+
+  .dp__action_button:hover {
+    background-color: #f3f4f6;
+  }
+
+  .dp__input {
+    height: 2.75rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    background-color: transparent;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: #1f2937;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    appearance: none;
+  }
+
+  .dp__input::placeholder {
+    color: #9ca3af;
+  }
+
+  .dp__input:focus {
+    border-color: #4ec676;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(32, 168, 74, 0.1);
   }
 }

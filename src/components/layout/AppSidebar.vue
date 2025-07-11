@@ -68,9 +68,9 @@ const endTransition = (el) => {
     :class="[
       'flex mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white text-gray-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gray-200',
       {
-        'lg:w-[34rem]': isExpanded || isMobileOpen || isHovered,
-        'lg:w-[7.7rem]': !isExpanded && !isHovered,
-        'translate-x-0 w-[34rem]': isMobileOpen,
+        'lg:w-[290px]': isExpanded || isMobileOpen || isHovered,
+        'lg:w-[90px]': !isExpanded && !isHovered,
+        'translate-x-0 w-[290px]': isMobileOpen,
         '-translate-x-full': !isMobileOpen,
         'lg:translate-x-0': true,
       },
@@ -89,8 +89,8 @@ const endTransition = (el) => {
           v-if="isExpanded || isHovered || isMobileOpen"
           src="@/assets/images/logo_enclave.png"
           alt="Logo"
-          width="280"
-          height="50"
+          width="150"
+          height="40"
         />
         <img v-else src="@/assets/images/logo_enclave.png" alt="Logo" width="150" height="80" />
       </router-link>
@@ -101,7 +101,7 @@ const endTransition = (el) => {
           <div v-for="(menuGroup, groupIndex) in menuGroups" :key="groupIndex">
             <h2
               :class="[
-                'mb-6 text-[1.75rem] uppercase flex leading-[20px] text-gray-400',
+                'mb-4 text-xs uppercase flex leading-[20px] text-gray-400',
                 !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start',
               ]"
             >
@@ -116,7 +116,7 @@ const endTransition = (el) => {
                   v-if="item.subItems"
                   @click="toggleSubmenu(groupIndex, index)"
                   :class="[
-                    'menu-item group w-full flex items-center gap-4 px-[12px] py-[8px] rounded-lg transition-colors h-auto',
+                    'menu-item group w-full',
                     {
                       'menu-item-active': isSubmenuOpen(groupIndex, index),
                       'menu-item-inactive': !isSubmenuOpen(groupIndex, index),
@@ -132,11 +132,9 @@ const endTransition = (el) => {
                       ,
                     ]"
                   >
-                    <component :is="item.icon" class="w-[3.5rem] h-[3.5rem]" />
+                    <component :is="item.icon" />
                   </span>
-                  <span
-                    v-if="isExpanded || isHovered || isMobileOpen"
-                    class="menu-item-text text-2xl font-medium text-gray-900 group-hover:text-brand-500"
+                  <span v-if="isExpanded || isHovered || isMobileOpen" class="menu-item-text"
                     >{{ item.name }}
                   </span>
                   <ChevronDownIcon
@@ -153,7 +151,7 @@ const endTransition = (el) => {
                   v-else-if="item.path"
                   :to="item.path"
                   :class="[
-                    'menu-item group w-full flex items-center gap-4 px-[12px] py-[36px] rounded-lg transition-colors h-[50px]',
+                    'menu-item group',
                     {
                       'menu-item-active': isActive(item.path),
                       'menu-item-inactive': !isActive(item.path),
@@ -165,11 +163,9 @@ const endTransition = (el) => {
                       isActive(item.path) ? 'menu-item-icon-active' : 'menu-item-icon-inactive',
                     ]"
                   >
-                    <component :is="item.icon" class="w-[3.5rem] h-[3.5rem]" />
+                    <component :is="item.icon" />
                   </span>
-                  <span
-                    v-if="isExpanded || isHovered || isMobileOpen"
-                    class="menu-item-text text-2xl"
+                  <span v-if="isExpanded || isHovered || isMobileOpen" class="menu-item-text"
                     >{{ item.name }}
                   </span>
                 </router-link>

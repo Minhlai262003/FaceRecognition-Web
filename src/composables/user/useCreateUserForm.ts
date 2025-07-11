@@ -103,6 +103,18 @@ export const useCreateUserForm = () => {
     }
   }
 
+  const resetForm = () => {
+    form.firstName = ''
+    form.lastName = ''
+    form.email = ''
+    form.gender = ''
+    form.phoneNumber = ''
+    form.birthDay = ''
+    form.role = ''
+    form.faceImages = Array(10).fill(null)
+    birthday.value = null
+    Object.keys(errors).forEach((key) => delete errors[key])
+  }
   return {
     form,
     birthday,
@@ -111,5 +123,6 @@ export const useCreateUserForm = () => {
     submit,
     genders,
     roles,
+    resetForm,
   }
 }

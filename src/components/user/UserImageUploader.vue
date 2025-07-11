@@ -66,15 +66,15 @@ const deleteImage = () => {
 <template>
   <div>
     <div
-      class="h-[9rem] w-full flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
+      class="h-[7rem] w-full flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
       @click="openImageModal"
     >
-      <div class="relative">
+      <div class="relative w-full flex items-center justify-center">
         <img
           v-if="selectedImage"
           :src="selectedImage"
           alt="Selected"
-          class="h-[9rem] w-full object-cover rounded-lg"
+          class="h-[7rem] w-full rounded-lg object-cover"
         />
         <PlusIcon v-else class="text-gray-300 h-[4rem] w-[4rem]" />
         <button
@@ -100,7 +100,7 @@ const deleteImage = () => {
       {{ props.helperText || 'Click to upload or capture image' }}
     </div>
 
-    <Modal v-if="isImageOptionModalOpen" @close="isImageOptionModalOpen = false" class="scale-125">
+    <Modal v-if="isImageOptionModalOpen" @close="isImageOptionModalOpen = false">
       <template #body>
         <div class="relative w-full max-w-[500px] rounded-2xl bg-white p-6 shadow-lg">
           <button
@@ -147,7 +147,7 @@ const deleteImage = () => {
       </template>
     </Modal>
 
-    <Modal v-if="isCameraOpen" @close="closeCamera" class="scale-125">
+    <Modal v-if="isCameraOpen" @close="closeCamera">
       <template #body>
         <div class="relative w-full max-w-[500px] rounded-2xl bg-white p-6 shadow-lg">
           <button
@@ -159,7 +159,30 @@ const deleteImage = () => {
 
           <h4 class="mb-4 text-center text-2xl font-semibold text-gray-800">Camera</h4>
 
-          <Camera ref="cameraRef" :resolution="{ width: 640, height: 480 }" autoplay />
+          <div class="relative w-full rounded-lg overflow-hidden">
+            <!-- Camera -->
+            <Camera
+              ref="cameraRef"
+              :resolution="{ width: 640, height: 480 }"
+              autoplay
+              class="w-full h-auto"
+            />
+
+            <!-- Face Frame Overlay -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div
+                class="border-2 border-dashed border-white rounded-full w-52 h-64 opacity-90"
+                style="box-shadow: 0 0 4px rgba(255, 255, 255, 0.8)"
+              ></div>
+            </div>
+
+            <!-- Optional Guide Text -->
+            <div
+              class="absolute bottom-4 w-full text-center text-white text-sm opacity-90 pointer-events-none"
+            >
+              Place your face inside the oval frame
+            </div>
+          </div>
 
           <div class="mt-6 flex justify-end gap-3">
             <button
