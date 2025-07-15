@@ -8,10 +8,10 @@ export function useRecognizeUser() {
       const response = await recognizeUser(data)
 
       if (response.recognized) {
-        console.log('User recognized:', response.employee)
-        console.log('Message:', response.employee.name)
         nameUser.value = response.employee.name
-        console.log('nameUser:', nameUser.value)
+        setTimeout(() => {
+          nameUser.value = null
+        }, 5000)
       }
     } catch (error) {}
   }
