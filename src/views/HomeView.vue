@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import WaveTop from '../components/shared/WaveTop.vue'
-import { useAuth } from '../composables/auth/useAuth'
-import { COLORS } from '../constants/colors.ts'
 import CameraDetection from '@/components/home/CameraDetection.vue'
 import { useRecognizeUser } from '@/composables/user/useRecognizeUser.ts'
 const { nameUser, handleRecognizeUser } = useRecognizeUser()
@@ -10,6 +8,48 @@ const showDropdown = ref(false)
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
 }
+const loadVoices = (): Promise<SpeechSynthesisVoice[]> => {
+  return new Promise((resolve) => {
+    const voices = window.speechSynthesis.getVoices()
+    if (voices.length > 0) {
+      resolve(voices)
+    } else {
+      const handler = () => {
+        const loadedVoices = window.speechSynthesis.getVoices()
+        resolve(loadedVoices)
+        window.speechSynthesis.onvoiceschanged = null
+      }
+      window.speechSynthesis.onvoiceschanged = handler
+    }
+  })
+}
+
+const speakText = (msg: string, voices: SpeechSynthesisVoice[]) => {
+  const selectedVoice =
+    voices.find((v) => v.name === 'Google US English') ||
+    voices.find((v) => v.lang === 'en-US' && v.name.toLowerCase().includes('female')) ||
+    voices.find((v) => v.lang === 'en-US') ||
+    voices[0]
+
+  const utterance = new SpeechSynthesisUtterance(msg)
+  utterance.lang = 'en-US'
+  utterance.rate = 1
+  utterance.pitch = 1
+
+  if (selectedVoice) {
+    utterance.voice = selectedVoice
+  }
+
+  window.speechSynthesis.cancel()
+  window.speechSynthesis.speak(utterance)
+}
+
+watch(nameUser, async (newName) => {
+  if (newName) {
+    const voices = await loadVoices()
+    speakText(`Hello ${newName}`, voices)
+  }
+})
 </script>
 
 <template>
