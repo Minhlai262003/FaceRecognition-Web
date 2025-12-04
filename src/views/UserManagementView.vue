@@ -189,17 +189,38 @@ const isOpenNotificationModal = ref(false)
                 </div>
 
                 <div class="lg:col-span-2">
-                  <label class="mb-1.5 block text-sm font-medium text-gray-700"
-                    >Identification Images</label
-                  >
-                  <div class="grid grid-cols-5 gap-4">
+                  <div class="flex items-center">
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700"
+                      >Identification Images</label
+                    >
+                    <button
+                      class="border rounded-full border-dashed ml-2 p-1.5 text-gray-500 hover:text-gray-700"
+                    >
+                      <svg
+                        class="fill-current"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M12 5C12.2761 5 12.5 5.2239 12.5 5.5V11.5H18.5C18.7761 11.5 19 11.7239 19 12C19 12.2761 18.7761 12.5 18.5 12.5H12.5V18.5C12.5 18.7761 12.2761 19 12 19C11.7239 19 11.5 18.7761 11.5 18.5V12.5H5.5C5.2239 12.5 5 12.2761 5 12C5 11.7239 5.2239 11.5 5.5 11.5H11.5V5.5C11.5 5.2239 11.7239 5 12 5Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <!-- <div class="grid grid-cols-5 gap-4">
                     <div v-for="(label, index) in faceImageLabels" :key="index">
                       <user-image-uploader
                         :helperText="label"
                         @update:file="onUpdateImage(index, $event)"
                       />
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

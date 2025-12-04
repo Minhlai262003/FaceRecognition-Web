@@ -60,10 +60,19 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   if (animationFrameId) cancelAnimationFrame(animationFrameId)
 })
+const props = defineProps<{
+  onCamera: boolean
+}>()
 </script>
 
 <template>
-  <div style="display: none">
-    <simple-vue-camera ref="cameraRef" :width="640" :height="480" />
+  <div :class="[{invisible: !onCamera}, 'h-[14rem] w-[25rem]']">
+    <simple-vue-camera ref="cameraRef"/>
   </div>
 </template>
+
+<style scoped>
+:deep(video) {
+  @apply object-cover;  
+}
+</style>

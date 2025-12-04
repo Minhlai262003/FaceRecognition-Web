@@ -47,15 +47,39 @@ const speakText = (msg: string, voices: SpeechSynthesisVoice[]) => {
 watch(nameUser, async (newName) => {
   if (newName) {
     const voices = await loadVoices()
-    speakText(`Hello ${newName}`, voices)
+    speakText(`Hello ${newName} Have a nice day`, voices)
   }
 })
+
+let clickCount = 0
+let clickTimeout: number | undefined
+
+const hiddenButtonClick = () => {
+   if (isCameraVisible.value) {
+    isCameraVisible.value = false
+    clickCount = 0
+    if (clickTimeout) clearTimeout(clickTimeout)
+    return
+  }
+  clickCount++
+  console.log(clickCount)
+  if (clickCount >= 5) {
+    isCameraVisible.value = true
+    clickCount = 0
+  }
+  if (clickTimeout) clearTimeout(clickTimeout)
+  clickTimeout = setTimeout(() => (clickCount = 0), 2000)
+}
+
+const isCameraVisible = ref(false)
 </script>
 
 <template>
-  <div class="relative w-auto h-auto">
+  <div class="relative w-auto h-screen">
     <WaveTop />
-    <div class="absolute inset-0 flex items-center justify-center h-screen w-full">
+    <button class="absolute bottom-0 left-0 w-10 h-10 opacity-0" @click="hiddenButtonClick">
+    </button>
+    <div class="absolute inset-0 flex items-center justify-center h-screen w-full pointer-events-none">
       <div v-if="nameUser" class="flex-col items-center justify-center text-center">
         <h1 class="text-6xl mb-[2rem]">Hello {{ nameUser }}</h1>
         <h2 class="text-4xl text-gray-800">Have a nice day!</h2>
@@ -66,8 +90,10 @@ watch(nameUser, async (newName) => {
           class="animate-flip-x h-auto w-auto"
           alt="Logo Enclave"
         />
-      </div>
+      </div>  
     </div>
+    <CameraDetection class="absolute top-0 left-0 z-50" :onCamera="isCameraVisible" @update:file="handleRecognizeUser($event)"/>
+
 
     <!-- Dropdown -->
     <!-- <div v-if="userName" class="fixed bottom-[20px] right-[20px] z-[50px]">
@@ -98,7 +124,6 @@ watch(nameUser, async (newName) => {
       </div>
     </div> -->
   </div>
-  <CameraDetection @update:file="handleRecognizeUser($event)" />
 </template>
 
 <style>
